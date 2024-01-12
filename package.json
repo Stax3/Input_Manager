@@ -1,5 +1,5 @@
 {
-  "name": "com.stax3.inputplugin",
-  "version": "1.0.1",
-  "displayName": "Stax 3 InputManager"
+    "name": "com.stax3.inputplugin",
+    "version": "1.0.2",
+    "displayName": "Stax 3 InputManager"
 }

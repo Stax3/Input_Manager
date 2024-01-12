@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
+#if NEW_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 #endif
@@ -30,7 +30,7 @@ namespace Stax3.Plugins.InputSystem
 
         [SerializeField] List<ScriptableObject> m_actions;
 
-#if ENABLE_INPUT_SYSTEM
+#if NEW_INPUT_SYSTEM
         private PlayerInput m_playerInput;
 #endif
         private InputMonoUpdate m_monoUpdate;
@@ -40,14 +40,14 @@ namespace Stax3.Plugins.InputSystem
 
         public void Init()
         {
-#if ENABLE_INPUT_SYSTEM
+#if NEW_INPUT_SYSTEM
             m_playerInput = new PlayerInput();
             m_playerInput.Enable();
 #endif
 
             m_monoUpdate = new GameObject("Input Mono Update", new Type[] { typeof(InputMonoUpdate) }).GetComponent<InputMonoUpdate>();
             m_actions.ForEach(x => ((Input_Action)x).Init(
-#if ENABLE_INPUT_SYSTEM
+#if NEW_INPUT_SYSTEM
                 m_playerInput
 #endif
 ));
@@ -58,7 +58,7 @@ namespace Stax3.Plugins.InputSystem
         {
             if (m_isInitialized)
             {
-#if ENABLE_INPUT_SYSTEM
+#if NEW_INPUT_SYSTEM
             if (m_playerInput != null)
             {
                 m_playerInput.Disable();
