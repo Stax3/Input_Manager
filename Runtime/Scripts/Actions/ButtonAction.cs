@@ -10,10 +10,12 @@ namespace Stax3.Plugins.InputSystem
         [SerializeField] KeyCode key;
         protected override void SubscribeEvents()
         {
+            base.SubscribeEvents();
             InputManager.Instance.monoUpdate.update += CheckInputInUpdate;
         }
         public override void UnSubscribeEvents()
         {
+            base.UnSubscribeEvents();
             InputManager.Instance.monoUpdate.update -= CheckInputInUpdate;
         }
         private void CheckInputInUpdate()

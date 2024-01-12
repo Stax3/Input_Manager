@@ -60,7 +60,8 @@ namespace Stax3.Plugins.InputSystem
             started = context.started;
             performed = context.performed;
             canceled = context.canceled;
-            vector2Input = context.ReadValue<Vector2>();
+            vector2Input = Vector2.zero;
+            //vector2Input = context.ReadValue<Vector2>();
         }
 #endif
         public CallbackData(CallbackData data)

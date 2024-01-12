@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: Button Action
   m_EditorClassIdentifier: 
   m_bindingName: SpaceBar
-  key: 32
