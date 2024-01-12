@@ -8,6 +8,7 @@ namespace Stax3.Plugins.InputSystem
     public class MovementAction : Input_Action
     {
         private Vector2 m_vector2Input = Vector2.zero;
+        private bool invokeOnceOnZero;
         protected override void SubscribeEvents()
         {
             //action.started += (context) =>
@@ -34,7 +35,17 @@ namespace Stax3.Plugins.InputSystem
             //if (m_vector2Input.sqrMagnitude == 0)
             //{
             //}
-            callback?.Invoke(new CallbackData { vector2Input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) });
+            m_vector2Input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if (m_vector2Input.sqrMagnitude > 0)
+            {
+                callback?.Invoke(new CallbackData { vector2Input = m_vector2Input });
+                invokeOnceOnZero = true;
+            }
+            else if (invokeOnceOnZero)
+            {
+                callback?.Invoke(new CallbackData { vector2Input = m_vector2Input });
+                invokeOnceOnZero = false;
+            }
         }
     }
 }
