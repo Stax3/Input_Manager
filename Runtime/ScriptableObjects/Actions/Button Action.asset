@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a6a1065b54b4a2294c3030116f47ec, type: 3}
+  m_Script: {fileID: 11500000, guid: eeb0b351ddc444726a15930625954784, type: 3}
   m_Name: Button Action
   m_EditorClassIdentifier: 
   m_bindingName: SpaceBar
+  key: 32

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7451d93357042e489ccecfcabf6711, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f3a9e0e379cb4c569d874924ede3d35, type: 3}
   m_Name: Input Manager
   m_EditorClassIdentifier: 
   m_actions:
-  - {fileID: 11400000, guid: c00693c6c2c094a47a1039b7018f8979, type: 2}
-  - {fileID: 11400000, guid: a2e89116bacc044f3bbc6165bf63b90b, type: 2}
+  - {fileID: 11400000, guid: c0a5cce2005a647a58182f094684aae0, type: 2}
+  - {fileID: 11400000, guid: aa3127673fcce4ba6bbefb06e36b83f8, type: 2}

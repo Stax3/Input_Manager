@@ -11,12 +11,14 @@ namespace Stax3.Plugins.InputSystem
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();
-            InputManager.Instance.monoUpdate.update += CheckInputInUpdate;
+            if (key != KeyCode.None)
+                InputManager.Instance.monoUpdate.update += CheckInputInUpdate;
         }
         public override void UnSubscribeEvents()
         {
             base.UnSubscribeEvents();
-            InputManager.Instance.monoUpdate.update -= CheckInputInUpdate;
+            if (key != KeyCode.None)
+                InputManager.Instance.monoUpdate.update -= CheckInputInUpdate;
         }
         private void CheckInputInUpdate()
         {
