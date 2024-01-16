@@ -32,7 +32,7 @@ namespace Stax3.Plugins.InputSystem
             if (m_newInputData.sqrMagnitude > 0)
             {
                 m_newInputData = Vector2.zero;
-                callback?.Invoke(new CallbackData { vector2Input = m_newInputData });
+                InvokeCallBack(new CallbackData { vector2Input = m_newInputData });
             }
         }
 
@@ -40,18 +40,18 @@ namespace Stax3.Plugins.InputSystem
         {
             if (m_newInputData.sqrMagnitude > 0)
             {
-                callback?.Invoke(new CallbackData { vector2Input = m_newInputData });
+                InvokeCallBack(new CallbackData { vector2Input = m_newInputData });
                 return;
             }
             m_vector2Input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (m_vector2Input.sqrMagnitude > 0)
             {
-                callback?.Invoke(new CallbackData { vector2Input = m_vector2Input });
+                InvokeCallBack(new CallbackData { vector2Input = m_vector2Input });
                 invokeOnceOnZero = true;
             }
             else if (invokeOnceOnZero)
             {
-                callback?.Invoke(new CallbackData { vector2Input = m_vector2Input });
+                InvokeCallBack(new CallbackData { vector2Input = m_vector2Input });
                 invokeOnceOnZero = false;
             }
         }

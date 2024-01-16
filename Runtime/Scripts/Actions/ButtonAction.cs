@@ -29,7 +29,7 @@ namespace Stax3.Plugins.InputSystem
                 data.started = !(data.performed = true);
             if (Input.GetKeyUp(key))
                 data.performed = !(data.canceled = true);
-            callback?.Invoke(data);
+            InvokeCallBack(data);
         }
     }
 }

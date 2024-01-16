@@ -14,7 +14,8 @@ namespace Stax3.Plugins.InputSystem
         protected InputAction action;
 #endif
         public string bindingName => m_bindingName;
-        public Action<CallbackData> callback;
+        public event Action<CallbackData> callback;
+        internal protected void InvokeCallBack(CallbackData data) => callback?.Invoke(data);
 
         public void Init(
 #if NEW_INPUT_SYSTEM
