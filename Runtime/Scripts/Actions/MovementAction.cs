@@ -15,19 +15,21 @@ namespace Stax3.Plugins.InputSystem
 
         protected override void SubscribeEvents()
         {
-            action.performed += (context) => { m_newInputData = context.ReadValue<Vector2>(); };
-            action.canceled += OnNewInputCanceled;
+            base.SubscribeEvents();
             InputManager.Instance.monoUpdate.update += CheckifInputSuccess;
         }
 
         public override void UnSubscribeEvents()
         {
-            action.performed -= (context) => { m_newInputData = context.ReadValue<Vector2>(); };
-            action.canceled -= OnNewInputCanceled;
+            base.UnSubscribeEvents();
             InputManager.Instance.monoUpdate.update -= CheckifInputSuccess;
         }
+        protected override void OnNewInputPerformed(CallbackContext context)
+        {
+            m_newInputData = context.ReadValue<Vector2>();
+        }
 
-        private void OnNewInputCanceled(CallbackContext context)
+        protected override void OnNewInputCanceled(CallbackContext context)
         {
             if (m_newInputData.sqrMagnitude > 0)
             {

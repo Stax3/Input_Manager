@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InputMonoUpdate : MonoBehaviour
 {
-    public event Action update;//= new List<Action>();
+    public event Action update;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -13,6 +13,5 @@ public class InputMonoUpdate : MonoBehaviour
     void Update()
     {
         update?.Invoke();
-        //update.ForEach(x => x?.Invoke());
     }
 }

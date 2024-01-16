@@ -10,12 +10,14 @@ namespace Stax3.Plugins.InputSystem
     {
         [Header("Name Must be equal to the new Input system action name.")]
         [SerializeField] private string m_bindingName;
+
+        protected CallbackData m_newInputData;
 #if NEW_INPUT_SYSTEM
         protected InputAction action;
 #endif
+
         public string bindingName => m_bindingName;
         public event Action<CallbackData> callback;
-        internal protected void InvokeCallBack(CallbackData data) => callback?.Invoke(data);
 
         public void Init(
 #if NEW_INPUT_SYSTEM
@@ -29,48 +31,45 @@ namespace Stax3.Plugins.InputSystem
             SubscribeEvents();
         }
 
+        protected void InvokeCallBack(CallbackData data) => callback?.Invoke(data);
+
         protected virtual void SubscribeEvents()
         {
 #if NEW_INPUT_SYSTEM
-            action.started += (context) => callback?.Invoke(new CallbackData(context));
-            action.performed += (context) => callback?.Invoke(new CallbackData(context));
-            action.canceled += (context) => callback?.Invoke(new CallbackData(context));
+            action.started += OnNewInputStarted;
+            action.performed += OnNewInputPerformed;
+            action.canceled += OnNewInputCanceled;
 #endif
         }
 
         public virtual void UnSubscribeEvents()
         {
 #if NEW_INPUT_SYSTEM
-            action.started -= (context) => callback?.Invoke(new CallbackData(context));
-            action.performed -= (context) => callback?.Invoke(new CallbackData(context));
-            action.canceled -= (context) => callback?.Invoke(new CallbackData(context));
+            action.started -= OnNewInputStarted;
+            action.performed -= OnNewInputPerformed;
+            action.canceled -= OnNewInputCanceled;
 #endif
             callback = null;
         }
-    }
-    public struct CallbackData
-    {
-        public bool started;
-        public bool performed;
-        public bool canceled;
-        public Vector2 vector2Input;
 
+        #region new input callbacks
 #if NEW_INPUT_SYSTEM
-        public CallbackData(CallbackContext context)
+        protected virtual void OnNewInputStarted(CallbackContext context)
         {
-            started = context.started;
-            performed = context.performed;
-            canceled = context.canceled;
-            vector2Input = Vector2.zero;
-            //vector2Input = context.ReadValue<Vector2>();
+            m_newInputData = new CallbackData(context);
+            callback?.Invoke(m_newInputData);
+        }
+        protected virtual void OnNewInputPerformed(CallbackContext context)
+        {
+            m_newInputData = new CallbackData(context);
+            callback?.Invoke(m_newInputData);
+        }
+        protected virtual void OnNewInputCanceled(CallbackContext context)
+        {
+            m_newInputData = new CallbackData(context);
+            callback?.Invoke(m_newInputData);
         }
 #endif
-        public CallbackData(CallbackData data)
-        {
-            started = data.started;
-            performed = data.performed;
-            canceled = data.canceled;
-            vector2Input = data.vector2Input;
-        }
+        #endregion
     }
 }
